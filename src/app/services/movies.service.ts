@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpClientJsonpModule } from '@angular/common/http';
+import { HttpClientJsonpModule, HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators'; // Map
 
 @Injectable()
@@ -8,7 +8,7 @@ export class MoviesService {
   private apikey: string = "USA TU API KEY AQUI!!!!";
   private urlMoviedb: string = "https://api.themoviedb.org/3";
 
-  constructor(private jsonp: HttpClientJsonpModule) { }
+  constructor(private http: HttpClient) { }
 
   getPopulares() {
 
