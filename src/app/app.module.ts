@@ -11,14 +11,21 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { HomeComponent } from './components/home/home.component';
 import { MovieComponent } from './components/movie/movie.component';
 import { SearchComponent } from './components/search/search.component';
+import { DomseguroPipe } from './pipes/domseguro.pipe';
+import { NoimagePipe } from './pipes/noimage.pipe';
+
 
 @NgModule({
   declarations: [
+    //COMPONENTS
     AppComponent,
     NavbarComponent,
     HomeComponent,
     MovieComponent,
-    SearchComponent
+    SearchComponent,
+    //PIPES
+    DomseguroPipe,
+    NoimagePipe
   ],
   imports: [
     BrowserModule,
