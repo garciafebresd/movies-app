@@ -5,10 +5,19 @@ import { map } from 'rxjs/operators'; // Map
 @Injectable()
 export class MoviesService {
 
-  private apikey: string = "3885e1138d563b43edcf562d4a163671";
-  private urlMoviedb: string = "https://api.themoviedb.org/3";
+  private apikey = '3885e1138d563b43edcf562d4a163671';
+  private urlMoviedb = 'https://api.themoviedb.org/3';
+
+  movies: any[];
 
   constructor(private http: HttpClient) { }
+
+  getMovie(movieId) {
+
+    const url = `${this.urlMoviedb}/movie/${movieId}?api_key=${this.apikey}&language=es`;
+    return this.http.jsonp(url, 'callback');
+  }
+
 
   getCartelera() {
 
@@ -21,25 +30,47 @@ export class MoviesService {
 
     // tslint:disable-next-line: max-line-length
     const url = `${this.urlMoviedb}/discover/movie?primary_release_date.gte=${dateFromFormat}&primary_release_date.lte=${dateToFormat}&api_key=${this.apikey}&language=es`;
-    return this.http.jsonp(url, 'callback');
+    return this.http.jsonp(url, 'callback').pipe(
+      map((response: any) => {
+        return response.results;
+      })
+    );
   }
 
-  getPopulares() {
-
-    const url = `${this.urlMoviedb}/discover/movie?sort_by=popularity.desc&api_key=${this.apikey}&language=es`;
-    return this.http.jsonp(url, 'callback');
+  getMostPolupar() {
+    const query = '/discover/movie?sort_by=popularity.desc';
+    return this.requestMostPopular(query);
   }
 
-  buscarPelicula(texto: string) {
+  getMostPopularKids() {
+    const query = '/discover/movie?certification_country=US&certification.lte=G&sort_by=popularity.desc';
+    return this.requestMostPopular(query);
+  }
+
+  requestMostPopular(query: string) {
+    const url = `${this.urlMoviedb}${query}&api_key=${this.apikey}&language=es`;
+    return this.http.jsonp(url, 'callback').pipe(
+      map((response: any) => {
+        return response.results;
+      })
+    );
+  }
+
+  findMovie(texto: string) {
 
     const url = `${this.urlMoviedb}/search/movie?query=${texto}&sort_by=popularity.desc&api_key=${this.apikey}&language=es`;
-    return this.http.jsonp(url, 'callback');
+    return this.http.jsonp(url, 'callback').pipe(
+      map((response: any) => {
+        this.movies = response.results;
+        return response.results;
+      })
+    );
   }
 
   dateFormatter(dateObject) {
     let month = dateObject.getMonth() + 1;
     let day = dateObject.getDate();
-    let year = dateObject.getFullYear();
+    const year = dateObject.getFullYear();
 
     if (month < 10) {
       month = '0' + month;

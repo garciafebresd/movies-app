@@ -8,11 +8,20 @@ import { MoviesService } from '../../services/movies.service';
 })
 export class HomeComponent implements OnInit {
 
+  billboard: any;
+  mostPopular: any;
+  mostPopularKids: any;
+
   constructor(public moviesService: MoviesService) {
     this.moviesService.getCartelera()
-      .subscribe((response) => {
-        console.log(response);
-      });
+      .subscribe(response => this.billboard = response);
+
+    this.moviesService.getMostPolupar()
+      .subscribe(response => this.mostPopular = response);
+
+    this.moviesService.getMostPopularKids()
+      .subscribe(response => this.mostPopularKids = response);
+
   }
 
   ngOnInit() {

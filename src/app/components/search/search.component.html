@@ -1,1 +1,18 @@
-<p>search works!</p>
+<div class="container main-container">
+    <div class="row">
+        <div class="col-md-12">
+
+            <label for="find">Buscar:</label>
+            <div class="form-group">
+                <input class="form-control" type="text" [(ngModel)]="title" name="title" placeholder="Buscar título" (keyup.enter)="findMovie()">
+            </div>
+        </div>
+    </div>
+
+    <app-loader *ngIf="loader"></app-loader>
+
+    <app-error [messageError]="messageError" *ngIf="error"></app-error>
+
+    <app-card *ngIf="!loader && !error" [items]="movies"></app-card>
+
+</div>

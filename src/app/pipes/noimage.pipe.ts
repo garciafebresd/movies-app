@@ -5,17 +5,23 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class NoimagePipe implements PipeTransform {
 
-  transform(images: any[]): any {
+  transform(movie: any, poster: boolean = false): string {
 
-    if (!images) {
-      return 'assets/images/noimage.png';
+    let url = 'http://image.tmdb.org/t/p/w500';
+
+    if(poster){
+      return `${url}${movie['poster_path']}`;
     }
 
-    if (images.length > 0) {
-      return images[0].url;
+    if (movie['backdrop_path']) {
+      return `${url}${movie['backdrop_path']}`;
     }
 
-    return 'assets/images/noimage.png';
+    if (movie['poster_path']) {
+      return `${url}${movie['poster_path']}`;
+    }
+
+    return 'assets/images/noimage.jpg';
   }
 
 }
