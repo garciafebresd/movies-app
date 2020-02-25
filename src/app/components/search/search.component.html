@@ -13,6 +13,6 @@
 
     <app-error [messageError]="messageError" *ngIf="error"></app-error>
 
-    <app-card *ngIf="!loader && !error" [items]="movies"></app-card>
+    <app-card *ngIf="!loader && !error" [items]="movies" [search]="title"></app-card>
 
 </div>

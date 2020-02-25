@@ -31,9 +31,7 @@ export class MoviesService {
     // tslint:disable-next-line: max-line-length
     const url = `${this.urlMoviedb}/discover/movie?primary_release_date.gte=${dateFromFormat}&primary_release_date.lte=${dateToFormat}&api_key=${this.apikey}&language=es`;
     return this.http.jsonp(url, 'callback').pipe(
-      map((response: any) => {
-        return response.results;
-      })
+      map((response: any) => response.results)
     );
   }
 
@@ -50,9 +48,7 @@ export class MoviesService {
   requestMostPopular(query: string) {
     const url = `${this.urlMoviedb}${query}&api_key=${this.apikey}&language=es`;
     return this.http.jsonp(url, 'callback').pipe(
-      map((response: any) => {
-        return response.results;
-      })
+      map((response: any) => response.results)
     );
   }
 

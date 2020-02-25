@@ -1,12 +1,12 @@
-<div class="card-columns m-5">
-    <div (click)="showMovieDetail(item)" *ngFor="let item of items" class="card">
-        <img [src]="item | noimage" class="card-img-top puntero" [alt]="item.original_title" />
+<div class="card-columns m-5 animated fadeIn fast">
+    <div *ngFor="let item of items" class="card">
+        <img [routerLink]="['/movie',item.id,'search',search]" [src]="item | noimage" class="card-img-top puntero" [alt]="item.original_title" />
         <div class="card-body">
             <h5 class="card-title">{{ item.original_title }}</h5>
             <p class="card-text text-justify">
                 {{ item.overview | slice:0:250 }}...
             </p>
-            <button type="button" class="btn btn-outline-primary btn-block">Ver más...</button>
+            <button [routerLink]="['/movie',item.id,'search',search]" type="button" class="btn btn-outline-primary btn-block">Ver más...</button>
         </div>
     </div>
 </div>

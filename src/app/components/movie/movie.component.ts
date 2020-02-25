@@ -9,18 +9,23 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class MovieComponent {
 
-  title: any;
   movie: any;
   loader: boolean;
+  backTo = '';
+  search = '';
 
   constructor(public moviesService: MoviesService,
-              public activatedRoute: ActivatedRoute) {
+    public activatedRoute: ActivatedRoute) {
 
 
     this.loader = true;
     this.activatedRoute.params.subscribe((params) => {
 
-      console.log(params);
+      if (params.search) {
+        this.search = params.search;
+      }
+
+      this.backTo = params.page;
       const movieId = params.id;
       this.moviesService.getMovie(movieId)
         .subscribe((movieResp) => {

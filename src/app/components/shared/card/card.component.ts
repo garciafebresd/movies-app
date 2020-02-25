@@ -8,20 +8,8 @@ import { Router } from '@angular/router';
 export class CardComponent {
 
   @Input() items: any[] = [];
+  @Input() search: string;
+
   constructor(private router: Router) { }
-
-  showMovieDetail(item: any) {
-
-  //   let artistId;
-
-  //   if (item.type === 'artist') {
-  //     artistId = item.id;
-  //   } else {
-  //     artistId = item.artists[0].id;
-  //   }
-
-  //   this.router.navigate(['/artist', artistId]);
-
-  }
 
 }
